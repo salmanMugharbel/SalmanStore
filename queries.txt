@@ -1,0 +1,48 @@
+# =============================================================================
+# 
+#Need to RUN ALL COMMANDS AT ONCE (recommended — avoids copy/paste errors):
+#   PowerShell (project folder with manage.py):
+#     Get-Content .\queries.txt -Raw | python manage.py shell
+#   CMD.exe:
+#     python manage.py shell < queries.txt
+#
+# INTERACTIVE SHELL: open "python manage.py shell" and paste ONLY Python lines
+# below (never paste lines starting with "PS C:\...")
+# =============================================================================
+
+from shop.models import Category, Product, Order
+
+Category.objects.all().delete()
+
+c1 = Category.objects.create(name='Electronics')
+c2 = Category.objects.create(name='Books')
+c3 = Category.objects.create(name='Clothing')
+c4 = Category.objects.create(name='Home')
+c5 = Category.objects.create(name='Sports')
+
+Product.objects.create(category=c1, name='Phone', price=600.0, quantity=8)
+Product.objects.create(category=c1, name='Laptop', price=1200.0, quantity=5)
+Product.objects.create(category=c1, name='Earbuds', price=120.0, quantity=20)
+Product.objects.create(category=c2, name='Python Book', price=30.0, quantity=15)
+Product.objects.create(category=c2, name='Django Book', price=40.0, quantity=10)
+Product.objects.create(category=c2, name='Math Book', price=25.0, quantity=12)
+Product.objects.create(category=c3, name='Tshirt', price=18.0, quantity=25)
+Product.objects.create(category=c3, name='Shirt', price=35.0, quantity=9)
+Product.objects.create(category=c3, name='Jacket', price=80.0, quantity=6)
+Product.objects.create(category=c4, name='Lamp', price=22.0, quantity=14)
+Product.objects.create(category=c4, name='Blender', price=95.0, quantity=4)
+Product.objects.create(category=c4, name='Vacuum', price=160.0, quantity=3)
+Product.objects.create(category=c5, name='Football', price=20.0, quantity=30)
+Product.objects.create(category=c5, name='Yoga Mat', price=28.0, quantity=18)
+Product.objects.create(category=c5, name='Dumbbell', price=110.0, quantity=7)
+
+Order.objects.create(product=Product.objects.get(name='Phone'), quantity=1)
+Order.objects.create(product=Product.objects.get(name='Python Book'), quantity=2)
+Order.objects.create(product=Product.objects.get(name='Football'), quantity=1)
+
+Product.objects.filter(price__gte=100)
+Product.objects.filter(name__icontains='shirt')
+Product.objects.filter(price__gte=30, name__icontains='book', quantity__gte=10)
+Product.objects.order_by('-price')
+Product.objects.filter(category=c5).update(quantity=50)
+Order.objects.filter(quantity__gte=1).delete()

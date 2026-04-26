@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Login</h2>
+
+{% if error_message %}
+<p class="error">{{ error_message }}</p>
+{% endif %}
+
+<form class="app-form auth-form" method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {% if next %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
+    <p>
+        <label for="id_username">Username:</label>
+        <input type="text" name="username" id="id_username" value="{{ username_value }}" required>
+    </p>
+    <p>
+        <label for="id_password">Password:</label>
+        <input type="password" name="password" id="id_password" required>
+    </p>
+    <button type="submit">Log in</button>
+</form>
+
+<p class="muted">No account? <a href="{% url 'register' %}">Register</a>.</p>
+
+{% endblock %}

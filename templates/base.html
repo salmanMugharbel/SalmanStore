@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Salman Store</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<div class="page">
+    <header class="site-header">
+        <h1 class="site-title">Salman Store</h1>
+        <nav class="nav">
+            <a class="nav-link" href="{% url 'products' %}">Products</a>
+            <a class="nav-link" href="{% url 'categories' %}">Categories</a>
+            <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+            {% if user.is_authenticated %}
+                <span class="user-chip">{{ user.username }}</span>
+                <a class="nav-link" href="{% url 'create_category' %}">New Category</a>
+                <a class="nav-link" href="{% url 'create_product' %}">New Product</a>
+                <form class="inline-logout" action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            {% else %}
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="content-card">
+        {% block content %}
+        {% endblock %}
+    </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Register</h2>
+
+{% if error_message %}
+<p class="error">{{ error_message }}</p>
+{% endif %}
+
+<form class="app-form auth-form" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+
+<p class="muted">Already have an account? <a href="{% url 'login' %}">Log in</a>.</p>
+
+{% endblock %}

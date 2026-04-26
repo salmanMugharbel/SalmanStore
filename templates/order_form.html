@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Place Order</h2>
+<p class="muted">Product: <strong>{{ product.name }}</strong> (${{ product.price }})</p>
+
+<form class="app-form" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit Order</button>
+</form>
+
+{% endblock %}

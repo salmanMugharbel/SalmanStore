@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Contact Form (CSRF Protected)</h2>
+
+<form class="app-form" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send</button>
+</form>
+
+{% if submitted_data %}
+    <h3>Submitted Data</h3>
+    <p><strong>Name:</strong> {{ submitted_data.name }}</p>
+    <p><strong>Message:</strong> {{ submitted_data.message }}</p>
+{% endif %}
+
+{% endblock %}

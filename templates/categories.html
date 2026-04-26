@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Categories</h2>
+
+<p class="muted">Total categories: {{ count }}</p>
+
+<ul class="item-list">
+    {% for category in categories %}
+        <li class="item-row">
+            <div>
+                <strong>{{ category.name }}</strong>
+                <div class="muted">{{ category.description }}</div>
+            </div>
+        </li>
+    {% empty %}
+        <li class="item-row">No categories available</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

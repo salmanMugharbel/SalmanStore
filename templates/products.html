@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Products</h2>
+
+<p class="muted">Total products: {{ count }}</p>
+
+<ul class="item-list">
+    {% for product in products %}
+        <li class="item-row">
+            <div>
+                <strong>{{ product.name }}</strong>
+                <div class="muted">${{ product.price }} - Category: {{ product.category.name }}</div>
+            </div>
+            <div class="row-actions">
+                {% if product.quantity > 10 %}
+                    <span class="stock-pill in-stock">In stock</span>
+                {% else %}
+                    <span class="stock-pill low-stock">Low stock</span>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <a class="btn-link" href="{% url 'create_order' product.id %}">Order</a>
+                {% endif %}
+            </div>
+        </li>
+    {% empty %}
+        <li class="item-row">No products available</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
