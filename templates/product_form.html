@@ -2,12 +2,22 @@
 
 {% block content %}
 
-<h2>Add Product</h2>
+<div class="page-head">
+    <div>
+        <h2>Add Product</h2>
+        <p class="muted">Create a product with clear pricing and stock details for a better shopping flow.</p>
+    </div>
+</div>
 
-<form class="app-form" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Product</button>
-</form>
+<div class="form-shell">
+    <form class="app-form" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button class="btn-primary" type="submit">Save Product</button>
+            <a class="btn-secondary" href="{% url 'products' %}">Back to Products</a>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

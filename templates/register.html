@@ -2,17 +2,27 @@
 
 {% block content %}
 
-<h2>Register</h2>
+<div class="page-head">
+    <div>
+        <h2>Register</h2>
+        <p class="muted">Create your account to start managing the store experience.</p>
+    </div>
+</div>
 
 {% if error_message %}
 <p class="error">{{ error_message }}</p>
 {% endif %}
 
-<form class="app-form auth-form" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-</form>
+<div class="form-shell auth-form">
+    <form class="app-form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button class="btn-primary" type="submit">Register</button>
+            <a class="btn-secondary" href="{% url 'login' %}">Already have an account?</a>
+        </div>
+    </form>
+</div>
 
 <p class="muted">Already have an account? <a href="{% url 'login' %}">Log in</a>.</p>
 

@@ -2,12 +2,22 @@
 
 {% block content %}
 
-<h2>Create Category</h2>
+<div class="page-head">
+    <div>
+        <h2>Create Category</h2>
+        <p class="muted">Group related products so users can navigate your store faster.</p>
+    </div>
+</div>
 
-<form class="app-form" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Category</button>
-</form>
+<div class="form-shell">
+    <form class="app-form" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button class="btn-primary" type="submit">Save Category</button>
+            <a class="btn-secondary" href="{% url 'categories' %}">Back to Categories</a>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

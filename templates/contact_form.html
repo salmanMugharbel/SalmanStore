@@ -2,18 +2,31 @@
 
 {% block content %}
 
-<h2>Contact Form (CSRF Protected)</h2>
+<div class="page-head">
+    <div>
+        <h2>Contact Form</h2>
+        <p class="muted">Send feedback or support requests with secure CSRF-protected submission.</p>
+        <p class="muted">CSRF experiment: open <a href="{% url 'contact_no_csrf' %}">no-token form</a> to see Django return 403 Forbidden.</p>
+    </div>
+</div>
 
-<form class="app-form" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Send</button>
-</form>
+<div class="form-shell">
+    <form class="app-form" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button class="btn-primary" type="submit">Send Message</button>
+            <a class="btn-secondary" href="{% url 'products' %}">Back to Store</a>
+        </div>
+    </form>
+</div>
 
 {% if submitted_data %}
-    <h3>Submitted Data</h3>
-    <p><strong>Name:</strong> {{ submitted_data.name }}</p>
-    <p><strong>Message:</strong> {{ submitted_data.message }}</p>
+    <div class="result-card">
+        <h3>Submitted Data</h3>
+        <p><strong>Name:</strong> {{ submitted_data.name }}</p>
+        <p><strong>Message:</strong> {{ submitted_data.message }}</p>
+    </div>
 {% endif %}
 
 {% endblock %}

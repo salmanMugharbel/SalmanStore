@@ -2,27 +2,37 @@
 
 {% block content %}
 
-<h2>Login</h2>
+<div class="page-head">
+    <div>
+        <h2>Login</h2>
+        <p class="muted">Welcome back. Sign in to manage products and place orders.</p>
+    </div>
+</div>
 
 {% if error_message %}
 <p class="error">{{ error_message }}</p>
 {% endif %}
 
-<form class="app-form auth-form" method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    {% if next %}
-    <input type="hidden" name="next" value="{{ next }}">
-    {% endif %}
-    <p>
-        <label for="id_username">Username:</label>
-        <input type="text" name="username" id="id_username" value="{{ username_value }}" required>
-    </p>
-    <p>
-        <label for="id_password">Password:</label>
-        <input type="password" name="password" id="id_password" required>
-    </p>
-    <button type="submit">Log in</button>
-</form>
+<div class="form-shell auth-form">
+    <form class="app-form" method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {% if next %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {% endif %}
+        <p>
+            <label for="id_username">Username:</label>
+            <input type="text" name="username" id="id_username" value="{{ username_value }}" required>
+        </p>
+        <p>
+            <label for="id_password">Password:</label>
+            <input type="password" name="password" id="id_password" required>
+        </p>
+        <div class="form-actions">
+            <button class="btn-primary" type="submit">Log in</button>
+            <a class="btn-secondary" href="{% url 'register' %}">Create account</a>
+        </div>
+    </form>
+</div>
 
 <p class="muted">No account? <a href="{% url 'register' %}">Register</a>.</p>
 

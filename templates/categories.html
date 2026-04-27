@@ -2,20 +2,31 @@
 
 {% block content %}
 
-<h2>Categories</h2>
+<div class="page-head">
+    <div>
+        <h2>Categories</h2>
+        <p class="muted">Browse your catalog by visual category cards.</p>
+    </div>
+    <span class="stat-chip">{{ count }} categories</span>
+</div>
 
-<p class="muted">Total categories: {{ count }}</p>
-
-<ul class="item-list">
+<ul class="category-grid">
     {% for category in categories %}
-        <li class="item-row">
-            <div>
-                <strong>{{ category.name }}</strong>
-                <div class="muted">{{ category.description }}</div>
+        <li class="category-card">
+            <img class="category-image" src="{{ category.image_url }}" alt="{{ category.obj.name }}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://via.placeholder.com/520x340?text=Category';">
+            <div class="category-body">
+                <h3 class="item-title">{{ category.obj.name }}</h3>
+                <p class="item-sub">{{ category.obj.description|default:"No description yet." }}</p>
+                <a class="btn-link" href="{% url 'products' %}?category={{ category.obj.id }}">Browse products</a>
             </div>
         </li>
     {% empty %}
-        <li class="item-row">No categories available</li>
+        <li class="empty-state">
+            No categories available.
+            {% if not user.is_authenticated %}
+                Please log in to view your own categories.
+            {% endif %}
+        </li>
     {% endfor %}
 </ul>
 
